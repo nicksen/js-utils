@@ -1,0 +1,18 @@
+{
+  "name": "nicksen-utils",
+  "version": "0.0.1",
+  "description": "Utilities",
+  "main": "src/index.js",
+  "author": "Nicklas Moberg <nicklas@nicks.se>",
+  "files": [
+    "src/"
+  ],
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jshint-stylish": "^0.2.0",
+    "load-grunt-tasks": "^0.4.0"
+  }
+}
