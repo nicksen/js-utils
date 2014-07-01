@@ -3,14 +3,12 @@ var gulp = require("gulp"),
 	rimraf = require("gulp-rimraf"),
 	jshint = require("gulp-jshint"),
 	browserify = require("browserify"),
-	fs = require("fs"),
 	watchify = require("watchify"),
 	prettyHrtime = require("pretty-hrtime"),
 	notify = require("gulp-notify"),
 	source = require('vinyl-source-stream'),
 	uglify = require("gulp-uglify"),
-	rename = require("gulp-rename"),
-	startTime;
+	rename = require("gulp-rename");
 
 var bundleLogger = {
 	start: function () {
