@@ -1,5 +1,7 @@
 "use strict";
 
+require("./events");
+
 module.exports = {
     closest: require("./closest"),
     debounce: require("./debounce"),
