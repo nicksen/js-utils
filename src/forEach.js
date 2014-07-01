@@ -1,31 +1,23 @@
-(function (factory) {
-    "use strict";
+"use strict";
 
-    if ("function" === typeof define && define.amd) {
-        define(["type"], factory);
-    } else if ("object" === typeof exports) {
-        module.exports = factory(require("./type"));
-    }
-})(function (type) {
-    "use strict";
+var type = require("./type");
 
-    var __hasProp = Object.prototype.hasOwnProperty;
+var __hasProp = Object.prototype.hasOwnProperty;
 
-    function forEach(collection, fn, context) {
-        fn = "function" === type(fn) ? fn : function () {};
+function forEach(collection, fn, context) {
+    fn = "function" === type(fn) ? fn : function () {};
 
-        if ("object" === type(collection)) {
-            for (var prop in collection) {
-                if (__hasProp.call(collection, prop)) {
-                    fn.call(context, collection[prop], prop, collection);
-                }
-            }
-        } else {
-            for (var i = 0, len = collection.length; i < len; i++) {
-                fn.call(context, collection[i], i, collection);
+    if ("object" === type(collection)) {
+        for (var prop in collection) {
+            if (__hasProp.call(collection, prop)) {
+                fn.call(context, collection[prop], prop, collection);
             }
         }
+    } else {
+        for (var i = 0, len = collection.length; i < len; i++) {
+            fn.call(context, collection[i], i, collection);
+        }
     }
+}
 
-    return forEach;
-});
+module.exports = forEach;

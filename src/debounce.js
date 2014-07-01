@@ -1,38 +1,28 @@
-(function (factory) {
-    "use strict";
+"use strict";
 
-    if ("function" === typeof define && define.amd) {
-        define(factory);
-    } else if ("object" === typeof exports) {
-        module.exports = factory();
+function debounce(fn, wait, immediate) {
+    if (null == immediate) {
+        immediate = false;
     }
-})(function () {
-    "use strict";
 
-    function debounce(fn, wait, immediate) {
-        if (null == immediate) {
-            immediate = false;
-        }
+    var timeout = null;
 
-        var timeout = null;
+    return function () {
+        var context = this,
+            args = arguments;
 
-        return function () {
-            var context = this,
-                args = arguments;
-
-            clearTimeout(timeout);
-            timeout = setTimeout(function () {
-                timeout = null;
-                if (!immediate) {
-                    fn.apply(context, args);
-                }
-            }, wait);
-
-            if (immediate && !timeout) {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            timeout = null;
+            if (!immediate) {
                 fn.apply(context, args);
             }
-        };
-    }
+        }, wait);
 
-    return debounce;
-})();
+        if (immediate && !timeout) {
+            fn.apply(context, args);
+        }
+    };
+}
+
+module.exports = debounce;

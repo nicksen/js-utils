@@ -8,37 +8,30 @@
  * 18 Feb 2007 becomes tomorrow.
  * Any other day is formatted according to given argument or the DATE_FORMAT setting if no argument is given.
  */
-(function (factory) {
-    "use strict";
+"use strict";
 
-    if ("function" === typeof define && define.amd) {
-        define(["time", "date"], factory);
-    } else if ("object" === typeof exports) {
-        module.exports = factory(require("./time"), require("./date"));
+var time = require("./time"),
+    date = require("./date");
+
+var naturalDay = function (timestamp, format) {
+    timestamp = null == timestamp ? time() : timestamp;
+    format = null == format ? "Y-m-d" : format;
+
+    var oneDay = 86400,
+        d = new Date(),
+        today = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() / 1000;
+
+    if (timestamp < today && timestamp >= today - oneDay) {
+        return "yesterday";
     }
-})(function (time, date) {
-    "use strict";
+    if (timestamp >= today && timestamp < today + oneDay) {
+        return "today";
+    }
+    if (timestamp >= today + oneDay && timestamp < today + 2 * oneDay) {
+        return "tomorrow";
+    }
 
-    var naturalDay = function (timestamp, format) {
-        timestamp = null == timestamp ? time() : timestamp;
-        format = null == format ? "Y-m-d" : format;
+    return date(format, timestamp);
+};
 
-        var oneDay = 86400,
-            d = new Date(),
-            today = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() / 1000;
-
-        if (timestamp < today && timestamp >= today - oneDay) {
-            return "yesterday";
-        }
-        if (timestamp >= today && timestamp < today + oneDay) {
-            return "today";
-        }
-        if (timestamp >= today + oneDay && timestamp < today + 2 * oneDay) {
-            return "tomorrow";
-        }
-
-        return date(format, timestamp);
-    };
-
-    return naturalDay;
-});
+module.exports = naturalDay;

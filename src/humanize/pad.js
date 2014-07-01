@@ -1,38 +1,28 @@
-(function (factory) {
-    "use strict";
+"use strict";
 
-    if ("function" === typeof define && define.amd) {
-        define(factory);
-    } else if ("object" === typeof exports) {
-        module.exports = factory();
+var pad = function (str, count, padChar, type) {
+    str += ""; // Ensure string
+
+    if (!padChar) {
+        padChar = " ";
+    } else if (1 < padChar.length) {
+        padChar = padChar.charAt(0);
     }
-})(function () {
-    "use strict";
 
-    var pad = function (str, count, padChar, type) {
-        str += ""; // Ensure string
+    type = null == type ? "left" : "right";
 
-        if (!padChar) {
-            padChar = " ";
-        } else if (1 < padChar.length) {
-            padChar = padChar.charAt(0);
+    if ("right" === type) {
+        while (count > str.length) {
+            str += padChar;
         }
-
-        type = null == type ? "left" : "right";
-
-        if ("right" === type) {
-            while (count > str.length) {
-                str += padChar;
-            }
-        } else {
-            // Default to left
-            while (count > str.length) {
-                str = padChar + str;
-            }
+    } else {
+        // Default to left
+        while (count > str.length) {
+            str = padChar + str;
         }
+    }
 
-        return str;
-    };
+    return str;
+};
 
-    return pad;
-});
+module.exports = pad;

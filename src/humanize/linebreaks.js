@@ -5,32 +5,22 @@
  * For example:
  * If value is Joel\nis a\n\nslug, the output will be <p>Joel<br />is a</p><p>slug</p>
  */
-(function (factory) {
-    "use strict";
+"use strict";
 
-    if ("function" === typeof define && define.amd) {
-        define(factory);
-    } else if ("object" === typeof exports) {
-        module.exports = factory();
-    }
-})(function () {
-    "use strict";
+var linebreaks = function (str) {
+    // remove beginning and ending newlines
+    str = str.replace(/^([\n|\r]*)/, "");
+    str = str.replace(/([\n|\r]*)$/, "");
 
-    var linebreaks = function (str) {
-        // remove beginning and ending newlines
-        str = str.replace(/^([\n|\r]*)/, "");
-        str = str.replace(/([\n|\r]*)$/, "");
+    // normalize all to \n
+    str = str.replace(/(\r\n|\n|\r)/g, "\n");
 
-        // normalize all to \n
-        str = str.replace(/(\r\n|\n|\r)/g, "\n");
+    // any consecutive new lines more than 2 gets turned into p tags
+    str = str.replace(/(\n{2,})/g, "</p><p>");
 
-        // any consecutive new lines more than 2 gets turned into p tags
-        str = str.replace(/(\n{2,})/g, "</p><p>");
+    // any that are singletons get turned into br
+    str = str.replace(/\n/g, "<br />");
+    return "<p>" + str + "</p>";
+};
 
-        // any that are singletons get turned into br
-        str = str.replace(/\n/g, "<br />");
-        return "<p>" + str + "</p>";
-    };
-
-    return linebreaks;
-});
+module.exports = linebreaks;

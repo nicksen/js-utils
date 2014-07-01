@@ -1,30 +1,20 @@
-(function (factory) {
-    "use strict";
+"use strict";
 
-    if ("function" === typeof define && define.amd) {
-        define(factory);
-    } else if ("object" === typeof exports) {
-        module.exports = factory();
-    }
-})(function () {
-    "use strict";
+var __slice = Array.prototype.slice;
 
-    var __slice = Array.prototype.slice;
+function closest(node, search) {
+    var matches = [],
+        hits = __slice.call(document.querySelectorAll(search));
 
-    function closest(node, search) {
-        var matches = [],
-            hits = __slice.call(document.querySelectorAll(search));
-
-        while (null != node) {
-            if (0 <= hits.indexOf(node)) {
-                matches.push(node);
-            }
-
-            node = node.parentNode;
+    while (null != node) {
+        if (0 <= hits.indexOf(node)) {
+            matches.push(node);
         }
 
-        return matches;
+        node = node.parentNode;
     }
 
-    return closest;
-});
+    return matches;
+}
+
+module.exports = closest;

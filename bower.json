@@ -1,0 +1,21 @@
+{
+  "name": "nicksen-utils",
+  "version": "0.0.2",
+  "homepage": "https://github.com/nicksen/js-utils",
+  "authors": [
+    "Nicklas Moberg <nicklas@nicks.se>"
+  ],
+  "main": "utils.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
