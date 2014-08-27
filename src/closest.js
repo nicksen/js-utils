@@ -1,10 +1,10 @@
 "use strict";
 
-var __slice = Array.prototype.slice;
+var slicer = require("./slicer");
 
 function closest(node, search) {
     var matches = [],
-        hits = __slice.call(document.querySelectorAll(search));
+        hits = slicer(document.querySelectorAll(search));
 
     while (null != node) {
         if (0 <= hits.indexOf(node)) {

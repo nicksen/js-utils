@@ -1,8 +1,10 @@
 "use strict";
 
+var slicer = require("./slicer");
+
 function log() {
     log.history.push(arguments);
-    console.log(Array.prototype.slice.call(arguments));
+    console.log(slicer(arguments));
 }
 
 log.history = [];

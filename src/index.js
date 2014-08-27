@@ -11,5 +11,6 @@ module.exports = {
     humanize: require("./humanize"),
     log: require("./log"),
     raf: require("./raf"),
+    slicer: require("./slicer"),
     type: require("./type")
 };

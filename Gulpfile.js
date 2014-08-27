@@ -80,4 +80,4 @@ gulp.task("watch", function () {
 
 gulp.task("default", [ "clean", "watch", "build" ]);
 
-gulp.task("dist", [ "clean", "compress" ]);
+gulp.task("dist", [ "clean", "build", "compress" ]);
