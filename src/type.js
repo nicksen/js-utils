@@ -11,7 +11,7 @@ for (n in names) {
     }
 }
 
-function type(obj) {
+var fn = function(obj) {
     var strType = __toString.call(obj);
     return classToType[strType] || "object";
 }
