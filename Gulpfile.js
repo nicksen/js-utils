@@ -8,7 +8,8 @@ var gulp = require("gulp"),
     notify = require("gulp-notify"),
     source = require('vinyl-source-stream'),
     uglify = require("gulp-uglify"),
-    rename = require("gulp-rename");
+    rename = require("gulp-rename")
+    karma = require("gulp-karma");
 
 var bundleLogger = {
     start: function () {
@@ -38,7 +39,26 @@ gulp.task("clean", function () {
         .pipe(rimraf());
 });
 
-gulp.task("build", function () {
+gulp.task("lint", function() {
+    return gulp.src("./src/**/*.js")
+        .pipe(jshint())
+        .pipe(jshint.reporter("jshint-stylish"));
+});
+
+gulp.task("test", [ "build" ], function() {
+    return gulp.src([ "utils.js", "test/**/*Spec.js" ])
+        .pipe(karma({
+            configFile: "karma.conf.js",
+            action: global.isWatching ? "watch" : "run"
+        }))
+        .on("error", function(err) {
+            if (!global.isWatching) {
+                throw err;
+            }
+        });
+});
+
+gulp.task("build", [ "clean", "lint" ], function () {
 
     var bundleMethod = global.isWatching ? watchify : browserify,
         bundler = bundleMethod({
@@ -75,9 +95,9 @@ gulp.task("compress", [ "build" ], function () {
 
 gulp.task("watch", function () {
     global.isWatching = true;
-    gulp.watch("./src/**/*.js");
+    gulp.watch("./src/**/*.js", [ "test" ]);
 });
 
-gulp.task("default", [ "clean", "watch", "build" ]);
+gulp.task("default", [ "watch", "test" ]);
 
-gulp.task("dist", [ "clean", "build", "compress" ]);
+gulp.task("dist", [ "test", "compress" ]);

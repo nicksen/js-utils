@@ -12,5 +12,6 @@ module.exports = {
     log: require("./log"),
     raf: require("./raf"),
     slicer: require("./slicer"),
+    trim: require("./trim"),
     type: require("./type")
 };

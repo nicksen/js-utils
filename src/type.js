@@ -3,15 +3,13 @@
 var __toString = Object.prototype.toString,
     classToType = {},
     names = ("Boolean|Number|String|Function|Array|Date|RegExp|Undefined|Null").split("|"),
-    n;
+    n = null;
 
-for (n in names) {
-    if (names.hasOwnProperty(name)) {
-        classToType["[object " + name + "]"] = name.toLowerCase();
-    }
+while(null != (n = names.pop())) {
+    classToType["[object " + n + "]"] = n.toLowerCase();
 }
 
-var fn = function(obj) {
+function type(obj) {
     var strType = __toString.call(obj);
     return classToType[strType] || "object";
 }
