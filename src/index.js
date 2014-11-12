@@ -3,8 +3,12 @@
 require("./events");
 
 module.exports = {
+    attempt: require("./attempt"),
     closest: require("./closest"),
+    contains: require("./contains"),
+    criteria: require("./criteria"),
     debounce: require("./debounce"),
+    delegate: require("./delegate"),
     forEach: require("./forEach"),
     getFloat: require("./getFloat"),
     getInt: require("./getInt"),

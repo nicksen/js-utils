@@ -60,19 +60,22 @@ gulp.task("test", [ "build" ], function() {
 
 gulp.task("build", [ "clean", "lint" ], function () {
 
-    var bundleMethod = global.isWatching ? watchify : browserify,
-        bundler = bundleMethod({
-            entries: [ "./src/index.js" ]
-        });
+    var opts = watchify.args;
+    opts.debug = true;
+    opts.standalone = "utils";
+    opts.entries = [ "./src/index" ];
+
+    if (global.isWatching) {
+        bundler = watchify(browserify(opts));
+    } else {
+        bundler = browserify(opts);
+    }
 
     var bundle = function () {
         bundleLogger.start();
 
         return bundler
-            .bundle({
-                debug: true,
-                standalone: "utils"
-            })
+            .bundle()
             .on("error", handleErrors)
             .pipe(source("utils.js"))
             .pipe(gulp.dest("./"))

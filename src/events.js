@@ -3,7 +3,6 @@
  * and `removeEventListener` in IE 8
  * TODO: Find a way to add for older browsers as well
  */
-(function() {
 "use strict";
 
 var Event = window.Event,
@@ -97,4 +96,3 @@ if (!Element.prototype.addEventListener) {
         Window.prototype.removeEventListener = remove;
     }
 }
-})();
